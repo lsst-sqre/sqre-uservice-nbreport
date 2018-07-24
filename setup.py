@@ -36,22 +36,14 @@ setup(
     license=LICENSE,
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: MIT License',
     ],
     keywords='lsst',
     packages=find_packages(exclude=['docs', 'tests*']),
     install_requires=[
-        'sqre-apikit==0.1.1',
-        'bitly-oauth2-proxy-session==0.1.4',
+        'sqre-apikit==0.1.2',
         'uWSGI==2.0.14'
     ],
     tests_require=['pytest'],
-    entry_points={
-        'console_scripts': [
-            'sqre-uservice-nbreport = uservice_' +
-            'nbreport:standalone'
-        ]
-    }
 )
