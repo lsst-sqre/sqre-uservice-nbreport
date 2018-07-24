@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: u-nbreport
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: u-nbreport
+    spec:
+      containers:
+
+        - name: u-nbreport
+          imagePullPolicy: "Always"
+          image: "lsstsqre/uservice-nbreport"
+          ports:
+            -
+              containerPort: 5000
+              name: u-nbreport
+              
