@@ -15,7 +15,7 @@ LICENSE = 'MIT'
 
 install_requires = [
     'sqre-apikit==0.1.2',
-    'uWSGI==2.0.14'
+    'uWSGI==2.0.17',
 ]
 
 tests_require = [
