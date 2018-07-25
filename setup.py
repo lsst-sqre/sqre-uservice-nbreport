@@ -13,6 +13,22 @@ URL = 'https://github.com/sqre-lsst/uservice-nbreport'
 LICENSE = 'MIT'
 
 
+install_requires = [
+    'sqre-apikit==0.1.2',
+    'uWSGI==2.0.14'
+]
+
+tests_require = [
+    'pytest==3.6.3',
+    'pytest-cov==2.5.1',
+    'pytest-flake8==1.0.1'
+]
+
+extras_require = {
+    'dev': tests_require
+}
+
+
 def local_read(filename):
     """Read a file into a string.
     """
@@ -39,11 +55,9 @@ setup(
     ],
     keywords='lsst',
     packages=find_packages(exclude=['docs', 'tests*']),
-    install_requires=[
-        'sqre-apikit==0.1.2',
-        'uWSGI==2.0.14'
-    ],
-    tests_require=['pytest'],
+    install_requires=install_requires,
+    tests_require=tests_require,
+    extras_require=extras_require,
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
 )

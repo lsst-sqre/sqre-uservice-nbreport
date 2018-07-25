@@ -2,15 +2,8 @@ sudo: false
 language: python
 matrix:
   include:
-  - env: TEST='py.test'
-    python: '2.7'
+  - python: '3.6'
     install:
-    - pip install -r requirements.txt
-    - pip install -e .
-    script: py.test
-  - env: TEST='py.test'
-    python: '3.5'
-    install:
-    - pip install -r requirements.txt
-    - pip install -e .
-    script: py.test
+    - pip install -e ".[dev]"
+    script:
+    - pytest
