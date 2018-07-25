@@ -1,18 +1,13 @@
-FROM       centos:7
+FROM python:3.6.6
 MAINTAINER sqre-admin
-LABEL      description="Publication service for LSST notebook-based reports" \
-           name="lsstsqre/uservice-nbreport"
+LABEL description="Publication service for LSST notebook-based reports" \
+      name="lsstsqre/uservice-nbreport"
 
-USER       root
-RUN        yum install -y epel-release
-RUN        yum repolist
-RUN        yum install -y git python-pip python-devel
-RUN        yum install -y gcc openssl-devel
-RUN        pip install --upgrade pip
-RUN        useradd -d /home/uwsgi -m uwsgi
-RUN        mkdir /dist
+USER root
+RUN useradd -d /home/uwsgi -m uwsgi && \
+    mkdir /dist
 
-# Must run python setup.py sdist first.
+# Supply on CL as --build-arg VERSION=<version> (or run `make image`).
 ARG        VERSION="0.0.1"
 LABEL      version="$VERSION"
 COPY       dist/sqre-uservice-nbreport-$VERSION.tar.gz /dist

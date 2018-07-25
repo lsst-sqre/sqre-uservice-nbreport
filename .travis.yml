@@ -1,9 +1,21 @@
 sudo: false
+services:
+  - docker
 language: python
 matrix:
   include:
-  - python: '3.6'
-    install:
-    - pip install -e ".[dev]"
-    script:
-    - pytest
+    - python: '3.6'
+      env: DEPLOY_DOCKER_IMAGE=true
+      install:
+        - make install
+      script:
+        - make test
+        - make image
+      after_success:
+        - make travis-docker-deploy
+env:
+  global:
+    - DEPLOY_DOCKER_IMAGE=false  # disable docker push in regular test matrix
+    # DockerHub
+    - secure: "WBhme4Y8TQOWY1gwaFXGZZDFtf2Ur/z4Uwr+zBOnz9qOrR/nUh5Z5SxxKl2ZQ3kvaQvdiDGcWaigR0qUqMwYucGAFEdiLERUqRJX/9j9KPd7sKqFfh+qsumDsiEWxZECpEvt4O/PNKzjv2ChcgQcRUMwQ792Bg8ZvnjkOuXSoY63d8AIAiOjDNmDf0qZ9/Ox2ipHudI7m4+7hfeqnTSlUDEZm7ZZacFdOyV4hwdHk5ix94pmQPpPbAcYtr8Ua6YlW7gnnVZjx0dSsMN9VNfjTst2/9guWpgX91qOqory1lR8Ms8Nt0vwFFy6ii2bkS29Ug+PW4WNdzAQva2/pTZSl6iMxJrWGNizctgFy4EYodZKvOUTrXkNYju+noyoG90fek70Z6eJ1dpugxoyYWXhyhbRILsqtzAAMx1boy7zTpQ+agp0IiXSV3MmyKjRaMumrQjAJdCUAEooLwBTiGybbG6JD2RmTJ6LoA8nUAsP1fkYcbBqHG9qozIXyNZWMEr8rQUXRookvrvMVg60iaxegrYw2XsJON5pJKLjDgAtCTwoqnjGoT3v4Aee/Ga97lrK0nS42YsvGk83aIzHxFL8j+iATgKX01QU7nQMMNklOtRfwZyfdviEBDe1y6YVfwpa7pwRO0n78MSEqN63hRasFIJfvz4lgiNcxC7C/yrib8s="
+    - secure: "BXMKxpyni9jYzfPm6AAngs577vXVZIeLMurOd7g8oVwxsdxOKzCjtUhJKbZMJ+fxpvu04Jr3k509U/nXbfIvEsmzMSIdx1cHZBN+G/IAVp74l6MMHXEWisCV7FWvLeeJKiLvQMd+p+avX3Gy1BlrMgwZR5laartzM78NTT6/cL6BNmDGDVwLjqhqZCaah+B9EVl412GVCA+xpNGaqMASLUPGemxGczdsuVQN/YkX56cKbDvUBPLNusnqn9L0AGApUoSmRpfAelI0qoyhfW1EYW1MGz2L6Mu2AzvWHM/LWmkuQGB5ceDgSPH1YiM0V6G1HJ1AHEmmHuXnp8mExgqviBPqwuaRHh3rJNyjv5KElNutB3n5h2j6lVYjP+z0n1Xw9UN7zxHUsyH5gdIQgIMB7xGydM456obHaw293ljQwBRcztMbgTjTgQTIUCwfVmWk5c8gTEZBavIS6UVJPp6BAf7UAMplnd9ltSTR4/2lkzfyXe4a/4FnLSccAT4C7e0XJSraQ/gUh0C+lf/STMYa/xZeZ3573+lNiYQbJWX1Tr6DSZbqbV75kUX3h5+pGtPTQhqruxYpnzHiWL8xLRwV4DP3+MQFau2+7wcX9Sf3in5fyfnZcKbaSecqkX0M6Nz+9QCs4XfLdaoTw0/OdPOqHgKxyduMa+Kvm1+f534POEM="
