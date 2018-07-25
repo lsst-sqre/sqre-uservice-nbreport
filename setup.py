@@ -10,7 +10,6 @@ DESCRIPTION = 'Publication service for LSST notebook-based reports'
 AUTHOR = 'Jonathan Sick'
 AUTHOR_EMAIL = 'jsick@lsst.org'
 URL = 'https://github.com/sqre-lsst/uservice-nbreport'
-VERSION = '0.0.1'
 LICENSE = 'MIT'
 
 
@@ -27,7 +26,6 @@ LONG_DESC = local_read('README.md')
 
 setup(
     name=PACKAGENAME,
-    version=VERSION,
     description=DESCRIPTION,
     long_description=LONG_DESC,
     url=URL,
@@ -46,4 +44,6 @@ setup(
         'uWSGI==2.0.14'
     ],
     tests_require=['pytest'],
+    use_scm_version=True,
+    setup_requires=['setuptools_scm'],
 )
