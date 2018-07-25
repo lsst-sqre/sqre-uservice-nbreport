@@ -6,6 +6,7 @@ __all__ = ('create_flask_app',)
 from apikit import APIFlask
 
 from .version import get_version
+from .cli import add_app_commands
 
 
 def create_flask_app():
@@ -24,5 +25,8 @@ def create_flask_app():
     # register blueprints with the routes
     from .routes import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/nbreport')
+
+    # Add custom Flask CLI subcommands
+    add_app_commands(app)
 
     return app
