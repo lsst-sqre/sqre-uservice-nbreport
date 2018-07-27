@@ -3,10 +3,13 @@
 
 __all__ = ('create_flask_app',)
 
+import os
+
 from apikit import APIFlask
 
 from .version import get_version
 from .cli import add_app_commands
+from .config import config_profiles
 
 
 def create_flask_app():
@@ -21,6 +24,10 @@ def create_flask_app():
         auth={"type": "basic",
               "data": {"username": "",
                        "password": ""}})
+
+    # Configurations
+    profile = os.getenv('NBREPORT_PROFILE', 'dev')
+    app.config.from_object(config_profiles[profile])
 
     # register blueprints with the routes
     from .routes import api as api_blueprint
