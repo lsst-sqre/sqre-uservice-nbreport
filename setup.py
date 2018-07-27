@@ -16,6 +16,7 @@ LICENSE = 'MIT'
 install_requires = [
     'sqre-apikit==0.1.2',
     'uWSGI==2.0.17',
+    'Flask-HTTPAuth==3.2.4',
 ]
 
 tests_require = [
