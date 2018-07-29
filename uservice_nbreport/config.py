@@ -24,6 +24,26 @@ class ConfigurationBase(metaclass=abc.ABCMeta):
     Set via ``$AUTH_GITHUB_ORG``.
     """
 
+    KEEPER_URL = os.getenv('KEEPER_URL', 'https://keeper.lsst.codes')
+    """URL of the LSST the Docs API server.
+
+    Set via ``$KEEPER_URL``.
+    """
+
+    KEEPER_USERNAME = os.getenv('KEEPER_USERNAME')
+    """Username of of the LTD Keeper account this app uses on behalf of the
+    user.
+
+    Set via ``$KEEPER_USERNAME``.
+    """
+
+    KEEPER_PASSWORD = os.getenv('KEEPER_PASSWORD')
+    """Password of of the LTD Keeper account this app uses on behalf of the
+    user.
+
+    Set via ``$KEEPER_PASSWORD``.
+    """
+
 
 class DevelopmentConfig(ConfigurationBase):
     """Configuration defaults for development.

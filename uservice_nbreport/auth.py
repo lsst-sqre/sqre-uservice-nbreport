@@ -1,9 +1,10 @@
-"""Authentication with GitHub.
+"""Authentication with GitHub and LSST the Docs.
 """
 
-__all__ = ('github_token_auth', 'requires_github_org_membership')
+__all__ = ('github_token_auth', 'requires_github_org_membership', 'ltd_login')
 
 from functools import wraps
+from urllib.parse import urljoin
 
 from flask import g, current_app
 from flask_httpauth import HTTPBasicAuth
@@ -164,3 +165,57 @@ def iter_github_endpoint(url, verb='GET', auth=None, headers=None,
     return iter_github_endpoint(
         next_url, verb=verb, auth=auth, headers=headers,
         current_data=current_data)
+
+
+def ltd_login():
+    """Log into LSST the Docs Keeper API server (used as a route decorator).
+
+    Notes
+    -----
+    This decorator **must** be applied after GitHub authentication and
+    authorization (e.g., `github_token_auth`, and
+    `requires_github_org_membership`).
+
+    This decorator adds two attributes to ``flask.g``:
+
+    - ``flask.g.ltd_user``: The username this app uses with LSST the Docs
+      Keeper.
+
+    - ``flask.g.ltd_token``: The limited-time token the app can use during
+      this route response.
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            try:
+                get_ltd_token()
+                return f(*args, **kwargs)
+
+            except Exception as e:
+                raise BackendError(
+                    'Unexpected error while authentication with LSST the '
+                    'Docs ({0})'.format(current_app.config['KEEPER_URL']),
+                    status_code=500,
+                    content=str(e))
+        return decorated_function
+    return decorator
+
+
+def get_ltd_token():
+    """Request and add the LTD Keeper token to the request context.
+
+    This function is meant to be called by the `ltd_login` decorator.
+    """
+    # Double check that we already logged-in with GitHub
+    if not hasattr(g, 'github_token'):
+        raise GitHubAuthenticationError()
+
+    response = requests.get(
+        urljoin(current_app.config['KEEPER_URL'], '/token'),
+        auth=(current_app.config['KEEPER_USERNAME'],
+              current_app.config['KEEPER_PASSWORD'])
+    )
+    response.raise_for_status()
+
+    g.ltd_user = current_app.config['KEEPER_USERNAME']
+    g.ltd_token = response.json()['token']
