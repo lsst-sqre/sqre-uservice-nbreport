@@ -12,3 +12,4 @@ from .errorhandlers import *
 from .root import *
 from .login import *
 from .registerreport import *
+from .reserveinstance import *
