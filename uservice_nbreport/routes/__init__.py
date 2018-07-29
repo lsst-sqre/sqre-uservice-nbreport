@@ -11,3 +11,4 @@ api = Blueprint('api', __name__)
 from .errorhandlers import *
 from .root import *
 from .login import *
+from .registerreport import *

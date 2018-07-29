@@ -70,6 +70,10 @@ class TestingConfig(ConfigurationBase):
     """Enable Flask's testing mode.
     """
 
+    KEEPER_USERNAME = 'ltduser'
+
+    KEEPER_PASSWORD = 'ltdpassword'
+
 
 class ProductionConfig(ConfigurationBase):
     """Configuration defaults for production.
