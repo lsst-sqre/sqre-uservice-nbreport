@@ -38,6 +38,30 @@ class DevelopmentConfig(ConfigurationBase):
     """
 
 
+class TestingConfig(ConfigurationBase):
+    """Configuration defaults for testing (with pytest).
+    """
+
+    PROFILE = 'test'
+    """Name of this configuration profile.
+    """
+
+    TESTING = True
+    """Enable Flask's testing mode.
+    """
+
+
+class ProductionConfig(ConfigurationBase):
+    """Configuration defaults for production.
+    """
+
+    PROFILE = 'production'
+    """Name of this configuration profile.
+    """
+
+
 config_profiles = {
-    'dev': DevelopmentConfig
+    'dev': DevelopmentConfig,
+    'test': TestingConfig,
+    'production': ProductionConfig,
 }
