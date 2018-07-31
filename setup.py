@@ -17,6 +17,7 @@ install_requires = [
     'sqre-apikit==0.1.2',
     'uWSGI==2.0.17',
     'Flask-HTTPAuth==3.2.4',
+    'jupyter==1.0.0',  # provides nbformat, nbconvert and underlying infra
 ]
 
 tests_require = [
