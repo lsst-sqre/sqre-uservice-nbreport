@@ -50,8 +50,24 @@ def register_report():
             "endpoint",
             status_code=500,
             content=str(product_response.json()))
+    product_url = product_response.headers['Location']
+
+    # Get more data about the product
+    product_response = requests.get(
+        product_url,
+        auth=(g.ltd_user, g.ltd_token)
+    )
+    if product_response.status_code >= 300:
+        raise BackendError(
+            "Unexcepted error calling LSST the Docs's GET {0!s} "
+            "endpoint".format(product_url),
+            status_code=500,
+            content=str(product_response.json()))
+    product_resource = product_response.json()
 
     response_data = {
-        'product': product_data['slug']
+        'product': product_resource['slug'],
+        'published_url': product_resource['published_url'],
+        'product_url': product_resource['self_url']
     }
     return jsonify(response_data), 201

@@ -34,13 +34,23 @@ def test_register_report(client, github_auth_header):
         status=200,
         json={'token': 'ltdtoken'}
     )
+    # Initial product registration
     responses.add(
         responses.POST,
         'https://keeper.lsst.codes/products/',
         status=201,
+        json={},
+        headers={'Location': 'https://keeper.lsst.codes/products/testr-000'}
+    )
+    # Getting info about the product resource
+    responses.add(
+        responses.GET,
+        'https://keeper.lsst.codes/products/testr-000',
+        status=200,
         json={
-            'slug': 'testr-000'
-        }
+            'slug': 'testr-000',
+            'published_url': 'https://testr-000.lsst.io',
+            'self_url': 'https://keeper.lsst.codes/products/testr-000'}
     )
 
     with client:
@@ -75,3 +85,7 @@ def test_register_report(client, github_auth_header):
         assert auth is not None
         assert auth.username == current_app.config['KEEPER_USERNAME']
         assert auth.password == 'ltdtoken'
+
+        # Test the call to GET /products/testr-000
+        assert responses.calls[4].request.url \
+            == 'https://keeper.lsst.codes/products/testr-000'
