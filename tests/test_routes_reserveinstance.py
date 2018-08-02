@@ -57,9 +57,6 @@ def test_reserve_instance(client, github_auth_header):
         response = client.post(
             '/nbreport/reports/testr-000/instances/',
             headers=headers,
-            data=json.dumps({
-                'product': 'testr-000'
-            })
         )
         assert response.status_code == 201
 

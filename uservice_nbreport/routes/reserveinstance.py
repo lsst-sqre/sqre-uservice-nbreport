@@ -8,12 +8,11 @@ __all__ = ('reserve_instance',)
 from urllib.parse import urljoin
 
 from apikit import BackendError
-from flask import g, request, jsonify, current_app
+from flask import g, jsonify, current_app
 import requests
 
 from . import api
 from ..auth import github_token_auth, requires_github_org_membership, ltd_login
-from ..exceptions import ValidationError
 
 
 @api.route('/reports/<report>/instances/', methods=['POST'])
@@ -23,12 +22,9 @@ from ..exceptions import ValidationError
 def reserve_instance(report):
     """Reserve a new edition for this report.
     """
-    request_data = request.json
-
-    try:
-        product = request_data['product']
-    except KeyError as e:
-        raise ValidationError('Invalid request: missing ' + e.args[0])
+    # The report name in this API is also the product's slug in the
+    # LTD Keeper API.
+    product = report
 
     edition_request_data = {
         'autoincrement': True,
