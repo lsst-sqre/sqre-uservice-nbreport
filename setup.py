@@ -31,6 +31,18 @@ extras_require = {
     'dev': tests_require
 }
 
+package_data = {'uservice_nbreport': [
+    'uservice_nbreport/publish/templates/report-html/*.css',
+    'uservice_nbreport/publish/templates/report-html/*.jinja',
+]}
+
+entry_points = {
+    'nbconvert.exports': [
+        'lsst-report-html '
+        '= uservice_nbreport.publish.htmlexport:LsstHtmlReportExporter',
+    ]
+}
+
 
 def local_read(filename):
     """Read a file into a string.
@@ -63,4 +75,7 @@ setup(
     extras_require=extras_require,
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
+    package_data=package_data,
+    include_package_data=True,
+    entry_points=entry_points,
 )

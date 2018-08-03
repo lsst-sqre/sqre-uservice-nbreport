@@ -1,0 +1,57 @@
+{# Base template for the HTML pages of LSST notebook-based report.
+
+This template is inspired by full.tpl in nbconvert, though it's fully
+reimplemented here so that we can control the HTML as much as possible.
+#}
+
+{# basic.tpl is part of nbconvert #}
+{%- extends 'basic.tpl' -%}
+{# mathjax.tpl is part of nbconvert #}
+{% from 'mathjax.tpl' import mathjax %}
+
+{%- block header -%}
+<!doctype html>
+<html>
+<head>
+{%- block html_head -%}
+<meta charset="utf-8">
+
+{% set nb_title = nb.metadata.get('title', '') or resources['metadata']['name'] %}
+<title>{{nb_title}}</title>
+
+{# FIXME can this go at the bottom of the body? #}
+{%- if "widgets" in nb.metadata -%}
+<script src="https://unpkg.com/jupyter-js-widgets@2.0.*/dist/embed.js"></script>
+{%- endif-%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+{% for css in resources.inlining.css -%}
+  <style type="text/css">
+    {{ css }}
+  </style>
+{% endfor %}
+
+<link rel="stylesheet" href="app.css">
+
+{# FIXME can this go at the bottom of the body? #}
+{{ mathjax() }}
+
+{%- endblock html_head -%}
+</head>
+{%- endblock header -%}
+
+{% block body %}
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    {{ super() }}
+    </div>
+  </div>
+</body>
+{%- endblock body %}
+
+{% block footer %}
+{{ super() }}
+</html>
+{% endblock footer %}
