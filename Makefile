@@ -1,4 +1,4 @@
-.PHONY: help install run image travis-docker-deploy version
+.PHONY: help install run image travis-docker-deploy version basic
 
 VERSION=$(shell FLASK_APP=uservice_nbreport flask version)
 
@@ -10,6 +10,7 @@ help:
 	@echo "  make image ..... (make tagged Docker image)"
 	@echo "  make travis-docker-deploy (push image to Docker Hub from Travis CI)"
 	@echo "  make version ... (print the app version)"
+	@echo "  make basic ..... (convert basic.ipynb to html)"
 
 install:
 	pip install -e ".[dev]"
@@ -29,3 +30,6 @@ travis-docker-deploy:
 
 version:
 	FLASK_APP=uservice_nbreport FLASK_DEBUG=1 flask version
+
+basic:
+	cd tests/notebooks && jupyter nbconvert --to uservice_nbreport.publish.htmlexport.LsstHtmlReportExporter basic.ipynb && cd ../..
