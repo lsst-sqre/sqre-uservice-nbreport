@@ -1,8 +1,10 @@
+import autoprefixer from 'autoprefixer';
 import cleanCSS from 'gulp-clean-css';
 import gulp from 'gulp';
 import minimist from 'minimist';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
+import postcss from 'gulp-postcss';
 
 // parse command line options
 // [--env dev (default) | prod]
@@ -40,6 +42,8 @@ const sassTask = () => {
     .pipe(sourcemaps.init())
     // Compile sass synchronously
     .pipe(sass.sync().on('error', sass.logError))
+    // Autoprefix with default configs
+    .pipe(postcss([autoprefixer()]))
     // Clean CSS
     .pipe(cleanCSS(cleanCssConfig[env]));
 
