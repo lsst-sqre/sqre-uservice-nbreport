@@ -1,0 +1,23 @@
+{
+  "name": "sqre-uservice-nbreport",
+  "private": true,
+  "version": "0.0.1",
+  "description": "LSST notebook-based report publisher",
+  "main": "gulpfile.babel.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lsst-sqre/sqre-uservice-nbreport.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lsst-sqre/sqre-uservice-nbreport/issues"
+  },
+  "homepage": "https://github.com/lsst-sqre/sqre-uservice-nbreport#readme"
+}
