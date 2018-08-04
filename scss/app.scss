@@ -10,7 +10,7 @@ div#notebook {
 }
 
 /* FIXME set resources.global_content_filter.no_prompt for this */
-div#notebook-container{
+div#notebook-container {
   padding: 6ex 12ex 8ex 12ex;
 }
 
@@ -18,13 +18,13 @@ div#notebook-container{
   div.cell {
     display: block;
     page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
   }
-  div.output { 
+  div.output_wrapper {
     display: block;
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
   }
 }
