@@ -61,6 +61,9 @@ target/
 # Rendered kubernetes configurations
 kubernetes/uservice-nbreport-secrets.yaml
 
+# Node / gulp
+node_modules
+
 # Test notebooks and conversions
 tests/notebooks/.ipynb_checkpoints
 tests/notebooks/basic.html
