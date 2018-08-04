@@ -8,7 +8,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "pretty-quick --staged",
+    "pretty": "pretty-quick"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,9 @@
     "gulp-postcss": "^7.0.1",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
-    "minimist": "^1.2.0"
+    "husky": "^0.14.3",
+    "minimist": "^1.2.0",
+    "prettier": "^1.14.0",
+    "pretty-quick": "^1.6.0"
   }
 }
