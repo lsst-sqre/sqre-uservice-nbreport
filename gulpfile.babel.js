@@ -72,7 +72,7 @@ gulp.task('sass', sassTask);
  * Watch for source changes and rebuild any assets
  */
 const watchTask = () => {
-  gulp.watch('styles.scss', ['sass']);
+  gulp.watch('scss/*.scss', ['sass']);
 };
 gulp.task('watch', watchTask);
 
