@@ -1,6 +1,7 @@
 import autoprefixer from 'autoprefixer';
 import cleanCSS from 'gulp-clean-css';
 import gulp from 'gulp';
+import GulpRunner from 'gulp-run';
 import minimist from 'minimist';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
@@ -31,6 +32,14 @@ const cleanCssConfig = {
  * Prints the environment setting.
  */
 export const environment = () => console.log(`${env}`);
+
+/*
+ * gulp pretty
+ * Run Prettier to autoformat code.
+ */
+export const pretty = () => {
+  return GulpRunner('npm run pretty').exec();
+};
 
 /*
  * gulp sass
