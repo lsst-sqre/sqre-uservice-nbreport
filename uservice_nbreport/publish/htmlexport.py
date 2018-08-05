@@ -1,10 +1,12 @@
 """Notebook HTML export with nbconvert, customized for LSST reports.
 """
 
-__all__ = ('LsstHtmlReportExporter',)
+__all__ = ('LsstHtmlReportExporter', 'build_site_from_filename', 'cli')
 
 from pathlib import Path
+import shutil
 
+import click
 from nbconvert.exporters.html import HTMLExporter
 from traitlets import default, Unicode
 
@@ -45,3 +47,37 @@ class LsstHtmlReportExporter(HTMLExporter):
         """
         css_path = Path(__file__).parent / 'templates/report-html/app.css'
         return [css_path]
+
+
+def build_site_from_filename(notebook_path, output_dir):
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    exporter = LsstHtmlReportExporter()
+    body, resources = exporter.from_filename(str(notebook_path))
+
+    (output_dir / 'index.html').write_text(body)
+
+    for asset_path in exporter.asset_paths:
+        dest = output_dir / asset_path.name
+        shutil.copy(asset_path, dest)
+        # NOTE: assumes all asset paths should reside in same directory
+        # as index.html
+
+    # FIXME write out the resources too.
+
+
+@click.command()
+@click.argument(
+    'notebook',
+    default=Path(__file__).parent / '../../tests/notebooks/basic.ipynb')
+@click.argument(
+    'site_dir',
+    default=Path('test-sites/basic'))
+def cli(notebook, site_dir):
+    """Build the HTML site for a notebook using the LSST report notebook
+    to HTML converter.
+    """
+    notebook = Path(notebook)
+    site_dir = Path(site_dir)
+    build_site_from_filename(notebook, site_dir)

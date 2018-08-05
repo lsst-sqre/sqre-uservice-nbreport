@@ -40,6 +40,10 @@ entry_points = {
     'nbconvert.exports': [
         'lsst-report-html '
         '= uservice_nbreport.publish.htmlexport:LsstHtmlReportExporter',
+    ],
+    'console_scripts': [
+        'lsst-report-html '
+        '= uservice_nbreport.publish.htmlexport:cli',
     ]
 }
 

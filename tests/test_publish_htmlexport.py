@@ -3,16 +3,16 @@
 
 from pathlib import Path
 
-from uservice_nbreport.publish.htmlexport import LsstHtmlReportExporter
+from uservice_nbreport.publish.htmlexport import build_site_from_filename
 
 
-def test_basic_export():
-    """Basic test of LsstHtmlReportExporter with a synthesized notebook.
+def test_basic_export(tmpdir):
+    """Basic test of LsstHtmlReportExporter with a test notebook.
     """
     path = Path(__file__).parent / 'notebooks/basic.ipynb'
     assert path.exists()
 
-    exporter = LsstHtmlReportExporter()
+    build_site_from_filename(path, tmpdir)
 
-    body, resources = exporter.from_filename(str(path))
-    assert body is not None
+    assert (tmpdir / 'index.html').exists()
+    assert (tmpdir / 'app.css').exists()
