@@ -25,9 +25,6 @@ class LsstHtmlReportExporter(HTMLExporter):
         # File -> Download menu
         return 'LSST report (HTML)'
 
-    # @default('default_template_path')
-    # def _default_template_path_default(self):
-
     @property
     def template_path(self):
         """Paths to the directories containing templates for the HTML reports.
@@ -41,3 +38,10 @@ class LsstHtmlReportExporter(HTMLExporter):
         """Name of the default template file.
         """
         return 'report.jinja'
+
+    @property
+    def asset_paths(self):
+        """Paths to static assets that must also be shipped with the site.
+        """
+        css_path = Path(__file__).parent / 'templates/report-html/app.css'
+        return [css_path]
