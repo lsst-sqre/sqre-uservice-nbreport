@@ -19,6 +19,10 @@ class LsstHtmlReportExporter(HTMLExporter):
         '#',
         help="The text used as the text for anchor links.").tag(config=True)
 
+    exclude_input_prompt = True
+
+    exclude_output_prompt = True
+
     @property
     def export_from_notebook(self):
         """Name of the notebook in the File -> Download as menu (`str`).
