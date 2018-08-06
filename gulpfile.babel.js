@@ -42,6 +42,14 @@ export const pretty = () => {
 };
 
 /*
+ * gulp basic
+ * Compile the basic site
+ */
+gulp.task('basic', ['sass'], () => {
+  return GulpRunner('lsst-report-html').exec();
+});
+
+/*
  * gulp sass
  * Compile the sass
  */
