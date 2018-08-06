@@ -1,30 +1,9 @@
 /* Overrides of notebook CSS for static HTML export */
 /* Based on nbconvert's full.tpl */
-body {
-  overflow: visible;
-  padding: 8px;
-}
-div#notebook {
-  overflow: visible;
-  border-top: none;
-}
 
-/* FIXME set resources.global_content_filter.no_prompt for this */
-div#notebook-container {
-  padding: 6ex 12ex 8ex 12ex;
-}
+// GENERIC
+// General tools like resets
+@import 'generic/generic.nbreset';
 
-@media print {
-  div.cell {
-    display: block;
-    page-break-inside: avoid;
-  }
-  div.output_wrapper {
-    display: block;
-    page-break-inside: avoid;
-  }
-  div.output {
-    display: block;
-    page-break-inside: avoid;
-  }
-}
+// UTILITIES
+@import 'utilities/utilities.print';
