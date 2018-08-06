@@ -5,5 +5,9 @@
 // General tools like resets
 @import 'generic/generic.nbreset';
 
+// components
+// Components on a page
+@import 'components/components.nbpage';
+
 // UTILITIES
 @import 'utilities/utilities.print';

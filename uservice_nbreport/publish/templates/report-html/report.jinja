@@ -43,11 +43,19 @@ reimplemented here so that we can control the HTML as much as possible.
 
 {% block body %}
 <body>
-  <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-    {{ super() }}
-    </div>
-  </div>
+  <div class="c-nbpage">
+
+    <div class="c-sidebar">
+      <p>Sidebar</p>
+    </div>  <!-- end .c-sidebar -->
+
+    <div tabindex="-1" id="notebook" class="border-box-sizing c-notebook">
+      <div class="container" id="notebook-container">
+      {{ super() }}
+      </div>
+    </div>  <!-- end .c-notebook -->
+
+  </div>  <!-- end .c-nbpage -->
 </body>
 {%- endblock body %}
 
