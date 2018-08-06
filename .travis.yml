@@ -7,8 +7,13 @@ matrix:
     - python: '3.6'
       env: DEPLOY_DOCKER_IMAGE=true
       install:
+        - "nvm install node"  # latest version of node
+        - "nvm use node"
+        - "npm install gulp --global"
+        - "npm install"
         - make install
       script:
+        - gulp sass
         - make test
         - make image
       after_success:
