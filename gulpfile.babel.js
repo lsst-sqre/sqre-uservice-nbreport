@@ -1,4 +1,5 @@
 import autoprefixer from 'autoprefixer';
+import browserSync from 'browser-sync';
 import cleanCSS from 'gulp-clean-css';
 import gulp from 'gulp';
 import GulpRunner from 'gulp-run';
@@ -49,6 +50,19 @@ gulp.task('basic', ['sass'], () => {
   return GulpRunner('lsst-report-html').exec();
 });
 
+gulp.task('serve', ['sass', 'basic'], () => {
+  browserSync.init({
+    server: {
+      baseDir: 'test-sites/basic'
+    }
+  });
+
+  gulp.watch('scss/**/*.scss', ['sass']);
+  gulp.watch('uservice_nbreport/publish/templates/report-html/*.{css,jinja}', [
+    'browser-sync-reload'
+  ]);
+});
+
 /*
  * gulp sass
  * Compile the sass
@@ -71,6 +85,7 @@ const sassTask = () => {
   }
 
   stream.pipe(gulp.dest('uservice_nbreport/publish/templates/report-html'));
+  stream.pipe(browserSync.stream());
   return stream;
 };
 gulp.task('sass', sassTask);
@@ -83,6 +98,14 @@ const watchTask = () => {
   gulp.watch('scss/*.scss', ['sass']);
 };
 gulp.task('watch', watchTask);
+
+// Reload Browser Sync (synchronously)
+// This task depends on the "basic" build task to make sure that the
+// reload is always done *after* the site is compiled.
+gulp.task('browser-sync-reload', ['basic'], done => {
+  browserSync.reload();
+  done();
+});
 
 /*
  * gulp
