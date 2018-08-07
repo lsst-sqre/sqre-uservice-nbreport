@@ -49,8 +49,10 @@ class LsstHtmlReportExporter(HTMLExporter):
     def asset_paths(self):
         """Paths to static assets that must also be shipped with the site.
         """
-        css_path = Path(__file__).parent / 'templates/report-html/app.css'
-        return [css_path]
+        template_dir = Path(__file__).parent / 'templates'
+        css_path = template_dir / 'report-html/app.css'
+        logo_path = template_dir / 'lsst-logo-dark-no-text.svg'
+        return [css_path, logo_path]
 
 
 def build_site_from_filename(notebook_path, output_dir):
