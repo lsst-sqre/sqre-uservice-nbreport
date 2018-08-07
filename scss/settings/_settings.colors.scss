@@ -1,0 +1,17 @@
+// Colors
+
+// Palette
+// The primary-blue is the base color from www.lsst.org. Then the red and
+// yellow are based on a triad.
+$primary-blue: #409ac7;
+$primary-red: #c7404d;
+$primary-yellow: #c7c240;
+// These are built via the overlay method
+// https://www.smashingmagazine.com/2016/04/web-developer-guide-color/#creating-a-cohesive-color-palette
+// with a 30% opacity
+$dark-grey: #38464d;
+$white: #f9fafb;
+
+// Applied colors
+$primary-color: $primary-blue;
+$text-color: $dark-grey;
