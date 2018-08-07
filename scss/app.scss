@@ -4,12 +4,17 @@
 // SETTINGS
 // Variables used throughout the project's Sass.
 @import 'settings/settings.colors';
+@import 'settings/settings.type';
 
 // GENERIC
 // General tools like resets
 @import 'generic/generic.nbreset';
 
-// components
+// ELEMENTS
+// Styles on native HTML elements
+@import 'elements/elements.page';
+
+// COMPONENTS
 // Components on a page
 @import 'components/components.nbpage';
 
