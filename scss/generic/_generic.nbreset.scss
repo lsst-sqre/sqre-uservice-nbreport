@@ -2,7 +2,7 @@
 
 body {
   overflow: visible;
-  padding: 8px;
+  padding: 0;
 }
 
 div#notebook {
@@ -15,4 +15,5 @@ div#notebook-container {
   box-shadow: none;
   margin: 0;
   padding: 0;
+  margin-left: -11.6px; // remove the cumulative left padding/border/margin that notebooks have
 }

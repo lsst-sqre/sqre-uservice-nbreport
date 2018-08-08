@@ -5,6 +5,7 @@
 // Variables used throughout the project's Sass.
 @import 'settings/settings.colors';
 @import 'settings/settings.type';
+@import 'settings/settings.spacing';
 
 // GENERIC
 // General tools like resets
@@ -17,6 +18,8 @@
 // COMPONENTS
 // Components on a page
 @import 'components/components.nbpage';
+@import 'components/components.logo';
+@import 'components/components.reportmeta';
 
 // UTILITIES
 @import 'utilities/utilities.print';

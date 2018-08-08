@@ -18,4 +18,5 @@ body {
   line-height: $base-line-height-px / $base-font-size-px; // unitless
 
   font-family: $base-font-family;
+  padding: $base-small-spacing-rem;
 }
