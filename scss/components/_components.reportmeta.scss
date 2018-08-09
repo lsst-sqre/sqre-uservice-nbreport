@@ -1,5 +1,16 @@
 // Report metadata component (.c-report-meta)
 
 .c-report-meta {
-  margin-bottom: $base-spacing-rem;
+  // This margin gets added to c-report-meta dd
+  margin-bottom: $base-small-spacing-rem;
+}
+
+.c-report-meta dt {
+  color: $faded-header-color;
+  font-weight: normal;
+}
+
+.c-report-meta dd {
+  font-weight: bold;
+  margin-bottom: $base-small-spacing-rem;
 }

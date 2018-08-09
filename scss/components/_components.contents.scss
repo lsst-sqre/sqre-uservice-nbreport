@@ -3,3 +3,8 @@
 .c-contents {
   margin-bottom: $base-spacing-rem;
 }
+
+.c-contents__header {
+  color: $faded-header-color;
+  font-weight: normal;
+}

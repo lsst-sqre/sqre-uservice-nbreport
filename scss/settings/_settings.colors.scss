@@ -15,3 +15,5 @@ $white: #f9fafb;
 // Applied colors
 $primary-color: $primary-blue;
 $text-color: $dark-grey;
+// $faded-header-color: desaturate(lighten($primary-color, 20%), 20%);
+$faded-header-color: desaturate(lighten($primary-color, 15%), 40%);
