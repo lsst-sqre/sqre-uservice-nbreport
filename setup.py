@@ -10,8 +10,26 @@ DESCRIPTION = 'Publication service for LSST notebook-based reports'
 AUTHOR = 'Jonathan Sick'
 AUTHOR_EMAIL = 'jsick@lsst.org'
 URL = 'https://github.com/sqre-lsst/uservice-nbreport'
-VERSION = '0.0.1'
 LICENSE = 'MIT'
+
+
+install_requires = [
+    'sqre-apikit==0.1.2',
+    'uWSGI==2.0.17',
+    'Flask-HTTPAuth==3.2.4',
+    'jupyter==1.0.0',  # provides nbformat, nbconvert and underlying infra
+]
+
+tests_require = [
+    'pytest==3.6.3',
+    'pytest-cov==2.5.1',
+    'pytest-flake8==1.0.1',
+    'responses==0.9.0'
+]
+
+extras_require = {
+    'dev': tests_require
+}
 
 
 def local_read(filename):
@@ -27,7 +45,6 @@ LONG_DESC = local_read('README.md')
 
 setup(
     name=PACKAGENAME,
-    version=VERSION,
     description=DESCRIPTION,
     long_description=LONG_DESC,
     url=URL,
@@ -36,22 +53,14 @@ setup(
     license=LICENSE,
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: MIT License',
     ],
     keywords='lsst',
     packages=find_packages(exclude=['docs', 'tests*']),
-    install_requires=[
-        'sqre-apikit==0.1.1',
-        'bitly-oauth2-proxy-session==0.1.4',
-        'uWSGI==2.0.14'
-    ],
-    tests_require=['pytest'],
-    entry_points={
-        'console_scripts': [
-            'sqre-uservice-nbreport = uservice_' +
-            'nbreport:standalone'
-        ]
-    }
+    install_requires=install_requires,
+    tests_require=tests_require,
+    extras_require=extras_require,
+    use_scm_version=True,
+    setup_requires=['setuptools_scm'],
 )
