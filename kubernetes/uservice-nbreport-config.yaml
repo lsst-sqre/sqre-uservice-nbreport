@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: u-nbreport
+data:
+  nbreport_profile: "production"
+  auth_github_org: "lsst"
+  keeper_url: "https://keeper.lsst.codes"
+  keeper_username: "nbreport"

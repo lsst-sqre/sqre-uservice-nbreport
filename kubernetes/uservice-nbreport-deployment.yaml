@@ -3,19 +3,44 @@ kind: Deployment
 metadata:
   name: u-nbreport
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         name: u-nbreport
     spec:
       containers:
-
         - name: u-nbreport
           imagePullPolicy: "Always"
-          image: "lsstsqre/uservice-nbreport"
+          image: "lsstsqre/uservice-nbreport:tickets-DM-15380"
           ports:
-            -
-              containerPort: 5000
+            - containerPort: 5000
               name: u-nbreport
-              
+          env:
+            # Environment variables from the u-nbreport ConfigMap
+            - name: "NBREPORT_PROFILE"
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: nbreport_profile
+            - name: "AUTH_GITHUB_ORG"
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: auth_github_org
+            - name: "KEEPER_URL"
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: keeper_url
+            - name: "KEEPER_USERNAME"
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: keeper_username
+            # Environment variables from the u-nbreport Secret
+            - name: "KEEPER_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: keeper_password
