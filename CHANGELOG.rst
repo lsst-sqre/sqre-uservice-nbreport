@@ -2,6 +2,13 @@
 Change log
 ##########
 
+0.1.1 (2018-08-09)
+==================
+
+- Set up the Kubernetes deployment, including templates for ConfigMaps and Secrets.
+
+- Updated ``uwsgi.ini`` configuration that's compatible with the https://github.com/lsst-sqre/k8s-api-nginx frontend for api.lsst.codes.
+
 0.1.0 (2018-08-08)
 ==================
 
