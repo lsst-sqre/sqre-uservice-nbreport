@@ -18,6 +18,7 @@ install_requires = [
     'uWSGI==2.0.17',
     'Flask-HTTPAuth==3.2.4',
     'jupyter==1.0.0',  # provides nbformat, nbconvert and underlying infra
+    'celery==4.2.1',
 ]
 
 tests_require = [

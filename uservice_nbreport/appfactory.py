@@ -40,6 +40,10 @@ def create_flask_app(profile=None):
         profile = os.getenv('NBREPORT_PROFILE', 'dev')
     app.config.from_object(config_profiles[profile])
 
+    # Initialize the celery app
+    from .celery import create_celery_app
+    create_celery_app(app)
+
     # register blueprints with the routes
     from .routes import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/nbreport')

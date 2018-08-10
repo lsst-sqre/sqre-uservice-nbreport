@@ -44,6 +44,14 @@ class ConfigurationBase(metaclass=abc.ABCMeta):
     Set via ``$KEEPER_PASSWORD``.
     """
 
+    CELERY_RESULT_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+    """URI for the celery result store (Redis).
+    """
+
+    CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+    """URI for the celery task broker (Redis).
+    """
+
 
 class DevelopmentConfig(ConfigurationBase):
     """Configuration defaults for development.
