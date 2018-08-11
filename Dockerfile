@@ -15,6 +15,6 @@ RUN        pip install /dist/sqre-uservice-nbreport-$VERSION.tar.gz
 
 USER       uwsgi
 WORKDIR    /home/uwsgi
-COPY       uwsgi.ini bin/run-celery-worker.bash .
+COPY       uwsgi.ini .
 EXPOSE     5000
 CMD        [ "uwsgi", "-T", "uwsgi.ini" ]
