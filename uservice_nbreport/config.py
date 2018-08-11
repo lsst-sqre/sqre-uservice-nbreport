@@ -52,6 +52,15 @@ class ConfigurationBase(metaclass=abc.ABCMeta):
     """URI for the celery task broker (Redis).
     """
 
+    KEEPER_AWS_ID = os.getenv('AWS_ID')
+    """AWS key identifier. Used for uploading files to LSST the Docs's
+    S3 bucket.
+    """
+
+    KEEPER_AWS_SECRET = os.getenv('AWS_SECRET')
+    """AWS secret key. Used for uploading files to LSST the Docs's S3 bucket.
+    """
+
 
 class DevelopmentConfig(ConfigurationBase):
     """Configuration defaults for development.

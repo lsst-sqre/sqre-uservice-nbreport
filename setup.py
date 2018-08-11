@@ -19,6 +19,7 @@ install_requires = [
     'Flask-HTTPAuth==3.2.4',
     'jupyter==1.0.0',  # provides nbformat, nbconvert and underlying infra
     'celery==4.2.1',
+    'ltd-conveyor==0.4.0',
 ]
 
 tests_require = [

@@ -49,3 +49,13 @@ spec:
                 secretKeyRef:
                   name: u-nbreport
                   key: redis_url
+            - name: 'AWS_ID'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: aws_id
+            - name: 'AWS_SECRET'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: aws_secret
