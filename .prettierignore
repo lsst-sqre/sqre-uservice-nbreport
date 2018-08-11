@@ -1,3 +1,8 @@
 package.json
 package-lock.json
 .travis.yml
+uservice-nbreport-config.yaml
+uservice-nbreport-deployment.yaml
+uservice-nbreport-secrets.template.yaml
+uservice-nbreport-secrets.yaml
+uservice-nbreport-service.yaml
