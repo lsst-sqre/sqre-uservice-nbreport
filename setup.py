@@ -26,7 +26,8 @@ tests_require = [
     'pytest==3.6.3',
     'pytest-cov==2.5.1',
     'pytest-flake8==1.0.1',
-    'responses==0.9.0'
+    'responses==0.9.0',
+    'pytest-mock==1.10.0'
 ]
 
 extras_require = {

@@ -6,7 +6,7 @@ import nbformat
 
 
 @responses.activate
-def test_upload_instance(client, github_auth_header):
+def test_upload_instance(client, github_auth_header, mocker):
     responses.add(
         responses.GET,
         'https://api.github.com/user',
@@ -32,6 +32,9 @@ def test_upload_instance(client, github_auth_header):
         json={'token': 'ltdtoken'}
     )
 
+    mock_task = mocker.patch(
+        'uservice_nbreport.routes.uploadnb.publish_instance')
+
     # Create a mock notebook
     nb = nbformat.v4.new_notebook()
     nb.cells.append(
@@ -48,3 +51,5 @@ def test_upload_instance(client, github_auth_header):
             data=nb_data
         )
         assert response.status_code == 202
+
+        mock_task.apply_async.assert_called_once()
