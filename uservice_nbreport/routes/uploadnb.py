@@ -3,7 +3,7 @@
 
 __all__ = ('upload_notebook',)
 
-from flask import request, jsonify
+from flask import request, jsonify, url_for
 
 from . import api
 from ..auth import github_token_auth, requires_github_org_membership, ltd_login
@@ -33,6 +33,12 @@ def upload_notebook(report, instance_id):
 
     nb_data = request.data.decode('utf-8')
 
-    publish_instance.apply_async(args=[nb_data, report, instance_id])
+    task = publish_instance.apply_async(args=[nb_data, report, instance_id])
 
-    return jsonify({}), 202
+    url = url_for('api.get_queue_item', id=task.id, _external=True)
+
+    data = {
+        'queue_url': url
+    }
+
+    return jsonify(data), 202
