@@ -46,7 +46,10 @@ def test_reserve_instance(client, github_auth_header):
         responses.GET,
         'https://keeper.lsst.codes/editions/1',
         status=200,
-        json={'slug': '1'},
+        json={
+            'slug': '1',
+            'published_url': 'https://testr-000.lsst.io/v/1',
+            'self_url': 'https://keeper.lsst.codes/editions/1'},
         headers={'Location': 'https://keeper.lsst.codes/editions/1'}
     )
 
