@@ -167,8 +167,7 @@ def upload_html(*, work_dir, keeper_url, ltd_token, ltd_product, instance_id,
                                   instance_id=instance_id)
 
     # Update the edition to use this build.
-    update_edition(keeper_url=keeper_url,
-                   ltd_token=ltd_token,
+    update_edition(ltd_token=ltd_token,
                    edition_url=edition_url,
                    build_url=build_resource['self_url'])
 
