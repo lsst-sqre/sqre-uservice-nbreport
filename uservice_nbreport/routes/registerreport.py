@@ -42,7 +42,7 @@ def register_report():
     product_response = requests.post(
         urljoin(current_app.config['KEEPER_URL'], '/products/'),
         json=product_data,
-        auth=(g.ltd_user, g.ltd_token)
+        auth=(g.ltd_token, '')
     )
     if product_response.status_code >= 300:
         raise BackendError(
@@ -55,7 +55,7 @@ def register_report():
     # Get more data about the product
     product_response = requests.get(
         product_url,
-        auth=(g.ltd_user, g.ltd_token)
+        auth=(g.ltd_token, '')
     )
     if product_response.status_code >= 300:
         raise BackendError(

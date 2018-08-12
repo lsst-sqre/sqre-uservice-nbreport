@@ -5,7 +5,6 @@ import json
 
 import responses
 from werkzeug.http import parse_authorization_header
-from flask import current_app
 
 
 @responses.activate
@@ -72,5 +71,5 @@ def test_reserve_instance(client, github_auth_header):
         auth = parse_authorization_header(
             responses.calls[3].request.headers['Authorization'])
         assert auth is not None
-        assert auth.username == current_app.config['KEEPER_USERNAME']
-        assert auth.password == 'ltdtoken'
+        assert auth.username == 'ltdtoken'
+        assert auth.password == ''

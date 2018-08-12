@@ -36,7 +36,7 @@ def reserve_instance(report):
     response = requests.post(
         new_edition_endpoint,
         json=edition_request_data,
-        auth=(g.ltd_user, g.ltd_token)
+        auth=(g.ltd_token, '')
     )
     if response.status_code >= 300:
         raise BackendError(
