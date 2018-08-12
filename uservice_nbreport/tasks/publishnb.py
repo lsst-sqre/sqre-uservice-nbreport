@@ -108,7 +108,7 @@ def create_html(nb, work_dir):
         AWS secret key. Used for uploading files to LSST the Docs's S3 bucket.
     """
     exporter = LsstHtmlReportExporter()
-    body, resources = exporter.from_notebook_note(nb)
+    body, resources = exporter.from_notebook_node(nb)
 
     # Write the HTML to the integration directory
     (work_dir / 'index.html').write_text(body)
