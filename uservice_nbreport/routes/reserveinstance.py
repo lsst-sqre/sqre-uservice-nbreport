@@ -54,6 +54,11 @@ def reserve_instance(report):
             status_code=500,
             content=str(response.json()))
 
-    instance_id = response.json()['slug']
+    edition = response.json()
+    return_data = {
+        'instance_id': edition['slug'],
+        'published_url': edition['published_url'],
+        'ltd_edition_url': edition['self_url']
+    }
 
-    return jsonify({'instance_id': instance_id}), 201
+    return jsonify(return_data), 201
