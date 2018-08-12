@@ -35,6 +35,7 @@ def register_report():
         'bucket_name': 'lsst-the-docs',
         'doc_repo': git_repo,
         'root_domain': 'lsst.io',
+        'root_fastly_domain': "n.global-ssl.fastly.net",
         'slug': handle.lower(),
         'title': title,
         'main_mode': 'manual'
