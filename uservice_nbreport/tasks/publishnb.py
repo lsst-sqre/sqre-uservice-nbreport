@@ -77,7 +77,7 @@ def run_publish_instance(*, nb, work_dir, keeper_url, ltd_token, ltd_product,
     create_html(nb, work_dir)
 
     # Upload to LTD
-    upload_html(work_dir=work_dir, nb=nb, keeper_url=keeper_url,
+    upload_html(work_dir=work_dir, keeper_url=keeper_url,
                 ltd_token=ltd_token, ltd_product=ltd_product,
                 instance_id=instance_id, aws_id=aws_id, aws_secret=aws_secret)
 
