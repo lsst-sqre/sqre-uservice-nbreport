@@ -36,4 +36,4 @@ version:
 	FLASK_APP=uservice_nbreport FLASK_DEBUG=1 flask version
 
 basic:
-	cd tests/notebooks && jupyter nbconvert --to uservice_nbreport.publish.htmlexport.LsstHtmlReportExporter basic.ipynb && cd ../..
+	lsst-report-html tests/notebooks/basic.ipynb test-sites/basic
