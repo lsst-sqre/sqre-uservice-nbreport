@@ -16,8 +16,7 @@ reimplemented here so that we can control the HTML as much as possible.
 {%- block html_head -%}
 <meta charset="utf-8">
 
-{% set nb_title = nb.metadata.get('title', '') or resources['metadata']['name'] %}
-<title>{{nb_title}}</title>
+<title>{{ nb.metadata['nbreport']['instance_handle'] }}: {{ nb.metadata['nbreport']['title'] }}</title>
 
 {# FIXME can this go at the bottom of the body? #}
 {%- if "widgets" in nb.metadata -%}
@@ -50,13 +49,12 @@ reimplemented here so that we can control the HTML as much as possible.
 
       <dl class="c-report-meta">
         <dt>Report</dt>
-        <dd><a href="#">DMQA-001</a></dd>
+        <dd><a href="{{ nb.metadata['nbreport']['published_url'] }}">{{ nb.metadata['nbreport']['handle'] }}</a>-{{ nb.metadata['nbreport']['instance_id'] }}</dd>
 
-        <dt>Instance</dt>
-        <dd>1</dd>
-
+        {#
         <dt>Created</dt>
         <dd>2018-08-06</dd>
+        #}
       </dl>
 
       {% if 'lsst_outline_root' in resources %}
@@ -81,7 +79,7 @@ reimplemented here so that we can control the HTML as much as possible.
     </div>  <!-- end .c-sidebar -->
 
     <nav class="c-crumbbar">
-      <p><a href="https://www.lsst.io/">LSST Documentation</a> / <a href="#">DMQA</a> / <a href="a">DMQA-001</a></p>
+      <p><a href="https://www.lsst.io/">LSST Documentation</a> / <a href="{{ nb.metadata['nbreport']['published_url'] }}">{{ nb.metadata['nbreport']['handle'] }}</a></p>
     </nav>  <!-- end .c-crumbbar -->
 
     <div tabindex="-1" id="notebook" class="border-box-sizing c-notebook">
