@@ -59,23 +59,25 @@ reimplemented here so that we can control the HTML as much as possible.
         <dd>2018-08-06</dd>
       </dl>
 
+      {% if 'lsst_outline_root' in resources %}
       <nav class="c-contents">
         <p><span class="c-contents__header">Contents</span></p>
         <ol class="c-contents__list">
-          <li>Section one
-            <ol>
-              <li>Subsection</li>
-              <li>Another subsection</li>
-            </ol>
-          </li>
-          <li>Section two
-            <ol>
-              <li>More subsections</li>
-            </ol>
-          </li>
-          <li>Section three</li>
+        {% for section in resources['lsst_outline_root'].children[0].children %}
+        <li><a href="{{ section.anchor }}">{{ section.text }}</a>
+          {% if section.children|length > 0 %}
+          <ol>
+            {% for subsection in section.children %}
+              <li><a href="{{ subsection.anchor }}">{{ subsection.text }}</a></li>
+            {% endfor %}
+          </ol>
+          {% endif %}
+        </li>
+        {% endfor %}
         </ol>
       </nav>  <!-- end .c-contents -->
+      {% endif %}
+
     </div>  <!-- end .c-sidebar -->
 
     <nav class="c-crumbbar">

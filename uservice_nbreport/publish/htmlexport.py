@@ -10,6 +10,8 @@ import click
 from nbconvert.exporters.html import HTMLExporter
 from traitlets import default, Unicode
 
+from .outline import LsstOutlinePreprocessor
+
 
 class LsstHtmlReportExporter(HTMLExporter):
     """nbconvert exporter to HTML, customized for LSST notebook-based reports.
@@ -60,6 +62,7 @@ def build_site_from_filename(notebook_path, output_dir):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     exporter = LsstHtmlReportExporter()
+    exporter.register_preprocessor(LsstOutlinePreprocessor, enabled=True)
     body, resources = exporter.from_filename(str(notebook_path))
 
     (output_dir / 'index.html').write_text(body)

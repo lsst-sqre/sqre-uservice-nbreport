@@ -18,6 +18,7 @@ import nbformat
 
 from ..celery import celery_app
 from ..publish.htmlexport import LsstHtmlReportExporter
+from ..publish.outline import LsstOutlinePreprocessor
 
 logger = get_task_logger(__name__)
 
@@ -108,6 +109,7 @@ def create_html(nb, work_dir):
         AWS secret key. Used for uploading files to LSST the Docs's S3 bucket.
     """
     exporter = LsstHtmlReportExporter()
+    exporter.register_preprocessor(LsstOutlinePreprocessor, enabled=True)
     body, resources = exporter.from_notebook_node(nb)
 
     # Write the HTML to the integration directory
