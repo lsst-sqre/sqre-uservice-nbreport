@@ -117,14 +117,21 @@ def build_outline_hierarchy(headers):
 
 class RootNode:
 
-    children = []
+    children = None
     level = 0
 
     def __init__(self):
-        pass
+        self.children = []
+        self.level = 0
 
     def get_parent_of_level(self, level):
         return self
+
+    def __str__(self):
+        text = '0: Root\n'
+        for child in self.children:
+            text += str(child)
+        return text
 
 
 class OutlineNode:
@@ -142,6 +149,15 @@ class OutlineNode:
         self.text = header_obj['title']
         self.anchor = header_obj['anchor']
         self.children = []
+
+    def __str__(self):
+        text = '{0}: {1}\n'.format(self.level, self.text)
+        for child in self.children:
+            text += str(child)
+        return text
+
+    def __repr__(self):
+        return '{0}: {1}\n'.format(self.level, self.text)
 
     @property
     def level(self):
