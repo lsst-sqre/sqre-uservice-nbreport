@@ -2,6 +2,25 @@
 Change log
 ##########
 
+0.2.0 (2018-08-15)
+==================
+
+This release is the first minimum viable product that accepts a notebook and converts it into an HTML report.
+
+- New ``LsstHtmlReportExporter`` subclass of ``nbconvert``\ ’s ``HTMLConverter``.
+  This subclass provides some defaults for the HTML converter, and also maintains knowledge of additional assets needed by the build.
+
+- New ``LsstOutlinePreprocessor`` subclass of ``nbconvert``\ ’s ``Preprocessor``.
+  This preprocessor analyzes the markdown header structure and creates a tree structure that is added to the resources dictionary under the ``lsst_outline`` key.
+  The Jinja HTML templates use this tree to generate a hierarchical table of contents in the sidebar.
+
+- New HTML and CSS theming for the notebooks.
+  The CSS is generated with a Gulp pipeline from Sass.
+
+- The ``POST /reports/<report>/instances/<instance_id>/notebook`` endpoint triggers a Celery queue task that actually transforms the notebook into HTML and uploads that HTML to LSST the Docs.
+
+- New ``GET /queue/<id>`` endpoint for obtaining the status of a processing item in the queue.
+
 0.1.1 (2018-08-09)
 ==================
 
