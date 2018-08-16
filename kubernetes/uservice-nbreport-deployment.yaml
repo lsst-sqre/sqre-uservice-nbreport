@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -11,36 +12,114 @@ spec:
     spec:
       containers:
         - name: u-nbreport
-          imagePullPolicy: "Always"
-          image: "lsstsqre/uservice-nbreport:tickets-DM-15380"
+          imagePullPolicy: 'Always'
+          image: 'lsstsqre/uservice-nbreport:tickets-DM-15306'
           ports:
             - containerPort: 5000
               name: u-nbreport
           env:
             # Environment variables from the u-nbreport ConfigMap
-            - name: "NBREPORT_PROFILE"
+            - name: 'NBREPORT_PROFILE'
               valueFrom:
                 configMapKeyRef:
                   name: u-nbreport
                   key: nbreport_profile
-            - name: "AUTH_GITHUB_ORG"
+            - name: 'AUTH_GITHUB_ORG'
               valueFrom:
                 configMapKeyRef:
                   name: u-nbreport
                   key: auth_github_org
-            - name: "KEEPER_URL"
+            - name: 'KEEPER_URL'
               valueFrom:
                 configMapKeyRef:
                   name: u-nbreport
                   key: keeper_url
-            - name: "KEEPER_USERNAME"
+            - name: 'KEEPER_USERNAME'
               valueFrom:
                 configMapKeyRef:
                   name: u-nbreport
                   key: keeper_username
             # Environment variables from the u-nbreport Secret
-            - name: "KEEPER_PASSWORD"
+            - name: 'KEEPER_PASSWORD'
               valueFrom:
                 secretKeyRef:
                   name: u-nbreport
                   key: keeper_password
+            - name: 'REDIS_URL'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: redis_url
+            - name: 'AWS_ID'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: aws_id
+            - name: 'AWS_SECRET'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: aws_secret
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: u-nbreport-worker
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: u-nbreport-worker
+    spec:
+      containers:
+        - name: u-nbreport
+          imagePullPolicy: 'Always'
+          image: 'lsstsqre/uservice-nbreport:tickets-DM-15306'
+          command: ['/bin/bash']
+          args: ['-c', 'celery worker -A uservice_nbreport.celery.celery_app -E -l INFO']
+          env:
+            # Environment variables from the u-nbreport ConfigMap
+            - name: 'NBREPORT_PROFILE'
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: nbreport_profile
+            - name: 'AUTH_GITHUB_ORG'
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: auth_github_org
+            - name: 'KEEPER_URL'
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: keeper_url
+            - name: 'KEEPER_USERNAME'
+              valueFrom:
+                configMapKeyRef:
+                  name: u-nbreport
+                  key: keeper_username
+            # Environment variables from the u-nbreport Secret
+            - name: 'KEEPER_PASSWORD'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: keeper_password
+            - name: 'REDIS_URL'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: redis_url
+            - name: 'AWS_ID'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: aws_id
+            - name: 'AWS_SECRET'
+              valueFrom:
+                secretKeyRef:
+                  name: u-nbreport
+                  key: aws_secret
+...

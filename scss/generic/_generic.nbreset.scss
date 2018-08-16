@@ -1,0 +1,19 @@
+// Reset for the default styling of notebooks processed by nbconvert.
+
+body {
+  overflow: visible;
+  padding: 0;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+  padding: 0;
+}
+
+div#notebook-container {
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  margin-left: -11.6px; // remove the cumulative left padding/border/margin that notebooks have
+}

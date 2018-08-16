@@ -1,0 +1,22 @@
+// Page-level HTML element styling
+
+html {
+  font-size: ($base-font-size-px / 16px) * 1em; // ems
+  line-height: $base-line-height-px / $base-font-size-px; // unitless
+
+  // Force the scrollbars to always be present to prevent horizontal shifts
+  // between pages that do and don't need scrollbars.
+  overflow-y: scroll;
+
+  // Ensure that the page always fills the viewport
+  min-height: 100%;
+}
+
+body {
+  // reiterate element styling from HTML because nbconvert chooses to set font-size on the body itself.
+  font-size: ($base-font-size-px / 16px) * 1em; // ems
+  line-height: $base-line-height-px / $base-font-size-px; // unitless
+
+  font-family: $base-font-family;
+  padding: $base-small-spacing-rem;
+}

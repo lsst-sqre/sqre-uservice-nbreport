@@ -44,6 +44,23 @@ class ConfigurationBase(metaclass=abc.ABCMeta):
     Set via ``$KEEPER_PASSWORD``.
     """
 
+    CELERY_RESULT_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+    """URI for the celery result store (Redis).
+    """
+
+    CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+    """URI for the celery task broker (Redis).
+    """
+
+    KEEPER_AWS_ID = os.getenv('AWS_ID')
+    """AWS key identifier. Used for uploading files to LSST the Docs's
+    S3 bucket.
+    """
+
+    KEEPER_AWS_SECRET = os.getenv('AWS_SECRET')
+    """AWS secret key. Used for uploading files to LSST the Docs's S3 bucket.
+    """
+
 
 class DevelopmentConfig(ConfigurationBase):
     """Configuration defaults for development.

@@ -14,3 +14,4 @@ from .login import *
 from .registerreport import *
 from .reserveinstance import *
 from .uploadnb import *
+from .getqueueitem import *

@@ -1,0 +1,26 @@
+/* Overrides of notebook CSS for static HTML export */
+/* Based on nbconvert's full.tpl */
+
+// SETTINGS
+// Variables used throughout the project's Sass.
+@import 'settings/settings.colors';
+@import 'settings/settings.type';
+@import 'settings/settings.spacing';
+
+// GENERIC
+// General tools like resets
+@import 'generic/generic.nbreset';
+
+// ELEMENTS
+// Styles on native HTML elements
+@import 'elements/elements.page';
+
+// COMPONENTS
+// Components on a page
+@import 'components/components.nbpage';
+@import 'components/components.logo';
+@import 'components/components.reportmeta';
+@import 'components/components.contents';
+
+// UTILITIES
+@import 'utilities/utilities.print';

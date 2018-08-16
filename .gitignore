@@ -60,3 +60,13 @@ target/
 
 # Rendered kubernetes configurations
 kubernetes/uservice-nbreport-secrets.yaml
+
+# Node / gulp
+node_modules
+# gulp build products
+uservice_nbreport/publish/templates/report-html/app.css
+
+# Test notebooks and conversions
+tests/notebooks/.ipynb_checkpoints
+tests/notebooks/basic.html
+test-sites

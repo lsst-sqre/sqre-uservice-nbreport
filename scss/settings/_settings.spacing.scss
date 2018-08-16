@@ -1,0 +1,7 @@
+// Spacings for padding and margins
+
+$base-spacing-rem: ($base-line-height-px / 16px) * 1rem;
+$base-small-spacing-rem: $base-spacing-rem / 2;
+$base-tiny-spacing-rem: $base-spacing-rem / 4;
+$base-large-spacing-rem: $base-spacing-rem * 2;
+$base-huge-spacing-rem: $base-spacing-rem * 4;

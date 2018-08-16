@@ -5,7 +5,6 @@ import json
 
 import responses
 from werkzeug.http import parse_authorization_header
-from flask import current_app
 
 
 @responses.activate
@@ -47,7 +46,10 @@ def test_reserve_instance(client, github_auth_header):
         responses.GET,
         'https://keeper.lsst.codes/editions/1',
         status=200,
-        json={'slug': '1'},
+        json={
+            'slug': '1',
+            'published_url': 'https://testr-000.lsst.io/v/1',
+            'self_url': 'https://keeper.lsst.codes/editions/1'},
         headers={'Location': 'https://keeper.lsst.codes/editions/1'}
     )
 
@@ -72,5 +74,5 @@ def test_reserve_instance(client, github_auth_header):
         auth = parse_authorization_header(
             responses.calls[3].request.headers['Authorization'])
         assert auth is not None
-        assert auth.username == current_app.config['KEEPER_USERNAME']
-        assert auth.password == 'ltdtoken'
+        assert auth.username == 'ltdtoken'
+        assert auth.password == ''

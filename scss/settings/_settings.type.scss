@@ -1,0 +1,11 @@
+// Typographic settings
+
+$base-font-size-px: 16px;
+$base-line-height-px: 1.4 * $base-font-size-px;
+
+// Hybrid of Medium and GitHub (for emoji) system font-stacks
+// https://css-tricks.com/snippets/css/system-font-stack/
+$system-font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$base-font-family: $system-font-stack;

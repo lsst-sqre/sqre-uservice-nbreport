@@ -1,2 +1,5 @@
 include README.md
 include LICENSE
+
+recursive-include uservice_nbreport *.css
+recursive-include uservice_nbreport *.jinja

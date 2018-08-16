@@ -18,17 +18,36 @@ install_requires = [
     'uWSGI==2.0.17',
     'Flask-HTTPAuth==3.2.4',
     'jupyter==1.0.0',  # provides nbformat, nbconvert and underlying infra
+    'celery[redis]==4.2.1',
+    'ltd-conveyor==0.4.0',
 ]
 
 tests_require = [
     'pytest==3.6.3',
     'pytest-cov==2.5.1',
     'pytest-flake8==1.0.1',
-    'responses==0.9.0'
+    'responses==0.9.0',
+    'pytest-mock==1.10.0'
 ]
 
 extras_require = {
     'dev': tests_require
+}
+
+package_data = {'uservice_nbreport': [
+    'uservice_nbreport/publish/templates/report-html/*.css',
+    'uservice_nbreport/publish/templates/report-html/*.jinja',
+]}
+
+entry_points = {
+    'nbconvert.exports': [
+        'lsst-report-html '
+        '= uservice_nbreport.publish.htmlexport:LsstHtmlReportExporter',
+    ],
+    'console_scripts': [
+        'lsst-report-html '
+        '= uservice_nbreport.publish.htmlexport:cli',
+    ]
 }
 
 
@@ -63,4 +82,7 @@ setup(
     extras_require=extras_require,
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
+    package_data=package_data,
+    include_package_data=True,
+    entry_points=entry_points,
 )

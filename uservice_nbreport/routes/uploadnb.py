@@ -3,16 +3,12 @@
 
 __all__ = ('upload_notebook',)
 
-# from urllib.parse import urljoin
-
-# from flask import g, request, jsonify, current_app
-from flask import request, jsonify
-# import requests
-import nbformat
+from flask import request, jsonify, url_for
 
 from . import api
 from ..auth import github_token_auth, requires_github_org_membership, ltd_login
 from ..exceptions import ValidationError
+from ..tasks import publish_instance
 
 
 @api.route('/reports/<report>/instances/<instance_id>/notebook',
@@ -35,11 +31,14 @@ def upload_notebook(report, instance_id):
             status_code=400,
             content='Sent mimetype {}'.format(request.mimetype))
 
-    notebook_data = request.data.decode('utf-8')
-    nb = nbformat.reads(notebook_data, as_version=4)
-    print(nb)
+    nb_data = request.data.decode('utf-8')
 
-    # TODO pass the nb, or just notebook_data, on to the asynchronous
-    # task service.
+    task = publish_instance.apply_async(args=[nb_data, report, instance_id])
 
-    return jsonify({}), 202
+    url = url_for('api.get_queue_item', id=task.id, _external=True)
+
+    data = {
+        'queue_url': url
+    }
+
+    return jsonify(data), 202

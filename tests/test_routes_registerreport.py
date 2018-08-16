@@ -83,8 +83,8 @@ def test_register_report(client, github_auth_header):
         auth = parse_authorization_header(
             responses.calls[3].request.headers['Authorization'])
         assert auth is not None
-        assert auth.username == current_app.config['KEEPER_USERNAME']
-        assert auth.password == 'ltdtoken'
+        assert auth.username == 'ltdtoken'
+        assert auth.password == ''
 
         # Test the call to GET /products/testr-000
         assert responses.calls[4].request.url \

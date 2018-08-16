@@ -1,0 +1,22 @@
+// Contents list component (.c-contents)
+
+.c-contents {
+  margin-bottom: $base-spacing-rem;
+}
+
+.c-contents__header {
+  color: $faded-header-color;
+  font-weight: normal;
+}
+
+// Top-level contents list (H2s in the document)
+.c-contents__list {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+// Nested lists (H3s and beyond)
+.c-contents__list ol {
+  padding-left: 2rem;
+  list-style-type: none;
+}
