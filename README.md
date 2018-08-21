@@ -1,20 +1,17 @@
-[![Build Status](https://travis-ci.org/lsst-sqre/uservice-nbreport.svg?branch=master)](https://travis-ci.org/lsst-sqre/uservice-nbreport)
+[![Build Status](https://travis-ci.org/lsst-sqre/sqre-uservice-nbreport.svg?branch=master)](https://travis-ci.org/lsst-sqre/sqre-uservice-nbreport)
 
 # sqre-uservice-nbreport
 
-LSST DM SQuaRE api.lsst.codes-compliant microservice wrapper.  TODO
+Service for LSST's notebook-based reports, hosted through api.lsst.codes. See [SQR-023: Design of the notebook-based report system](https://sqr-023.lsst.io) for background and https://nbreport.lsst.io for the client-side application.
 
-## Usage
+## Endpoints
 
-`sqre-uservice-nbreport` will run standalone on port
-5000 or under `uwsgi`.  It responds to the following routes:
+- `GET /`: returns `OK` (used by Google Container Engine Ingress healthcheck)
 
-### Routes
+- `GET /nbreport/metadata`: service metadata.
 
-* `/`: returns `OK` (used by Google Container Engine Ingress healthcheck)
+- `POST /nbreports/`: register a new report.
 
-* `/nbreport`: TODO
+- `POST /reports/<report>/instances/`: reserve a new report instance.
 
-### Returned Structure
-
-The returned structure is JSON.  TODO.
+- `POST /reports/<report>/instances/<instance_id>/notebook`: upload a notebook file (`.ipynb`) for publication.
